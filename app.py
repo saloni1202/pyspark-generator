@@ -10,8 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Set your Groq API key
-# os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
-os.environ["GROQ_API_KEY"] ="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"
+os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
 
 # LangChain prompt template
 template = """
