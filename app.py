@@ -1,6 +1,7 @@
 import os
 import json
 import streamlit as st
+import pandas as pd
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_groq import ChatGroq
@@ -36,15 +37,20 @@ chain = prompt | llm | parser
 
 # Streamlit UI
 st.set_page_config(page_title="PySpark Code Generator", layout="centered")
-st.title("🧠 PySpark Code Generator from JSON + Business Logic")
+st.title("🧠 PySpark Code Generator from Excel + Business Logic")
 
-uploaded_file = st.file_uploader("Upload JSON file", type=["json"])
+uploaded_file = st.file_uploader("Upload Excel file (.xls or .xlsx)", type=["xls", "xlsx"])
 business_logic = st.text_area("Enter Business Logic", height=100)
 
 if uploaded_file and business_logic:
     try:
-        json_data = json.load(uploaded_file)
-        st.subheader("📦 Uploaded JSON")
+        # Read Excel file into DataFrame
+        df = pd.read_excel(uploaded_file)
+
+        # Convert DataFrame to JSON records format
+        json_data = df.to_dict(orient="records")
+
+        st.subheader("📦 Extracted JSON from Excel")
         st.json(json_data)
 
         with st.spinner("Generating PySpark code..."):
