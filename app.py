@@ -37,7 +37,7 @@ chain = prompt | llm | parser
 
 # Streamlit UI
 st.set_page_config(page_title="PySpark Code Generator", layout="centered")
-st.title("🧠 PySpark Code Generator from Excel + Business Logic")
+st.title("🧠 PySpark Code Generator")
 
 uploaded_file = st.file_uploader("Upload Excel file (.xls or .xlsx)", type=["xls", "xlsx"])
 business_logic = st.text_area("Enter Business Logic", height=100)
